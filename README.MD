@@ -243,11 +243,12 @@ I saw that changing the screen size and graphics quality influences the model pe
 
 ### Driving results on evaluation track
 I tested my model using the second track. I did not use these data while traning.
-You can check out the results on the video below.
 
 The car was able to drive the test track without any crashes safely. Quite impressive for the amount of data used and the fast training time.
 We see that sometimes the car
 comes very close to the border. Changing the offset angle and playing with learning rate and number of epochs could
 further optimize the model.
 
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/4lSxEpelXUw/0.jpg)](http://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE "Video Title")
+**Check out the performance by clicking on the image below:**
+
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/4lSxEpelXUw/0.jpg)](http://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE "Performance on Test track")
