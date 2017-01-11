@@ -251,4 +251,4 @@ further optimize the model.
 
 **Check out the performance by clicking on the image below:**
 
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/4lSxEpelXUw/0.jpg)](http://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE "Performance on Test track")
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/4lSxEpelXUw/0.jpg)](http://www.youtube.com/watch?v=4lSxEpelXUw "Performance on Test track")
