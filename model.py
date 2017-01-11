@@ -112,16 +112,8 @@ def persp_warp(image,steering,warp):
     return image,steering
 
 
-# Here we load the validation data. This is recordet on track 1 and only using the center camera
+# Here we load the validation data. This is recorded on track 1 and only using the center camera
 
-val_file="J:/datasets/simulator_val/driving_log.csv"
-val_data  =  pd.read_csv(val_file,names=["center", "left", "right","steering", "throttle", "break", "speed"])
-center_features = np.array([np.array(Image.open(f).resize((210,105))) for f in val_data["center"]]).astype("float32")
-center_labels = np.array([f for f in val_data["steering"]])
-val_X=center_features
-val_y=center_labels
-val_X = [translate(i, -5 , -24 ) for i in val_X]
-val_X = np.array(val_X)
 
 def data_generator(offsets,fs,ls,bz=200,mode="disk",pvs=30, phs=20,debug=False,shuffle=True,off_ang=0.25,off_sh=0.001,warp=45):
     if shuffle==True: # For debugging purposes we can disable shuffling the dataset
@@ -217,16 +209,16 @@ if __name__ == "__main__":
     model = NVIDIAmodel()
     model.compile(loss="MSE", optimizer=optimizer)
     ###  Parameters ####
-    nb_epoch = 5 #number of epochs
-    off_ang = 0.1 #offset angle of the cameras
+    nb_epoch = 15 #number of epochs
+    off_ang = 0.09 #offset angle of the cameras
     off_sh = off_ang/100 #angle adjustments when moving the pictures horizontally
-    warp=50 #Range of perspective warping
+    warp=65 #Range of perspective warping
     pvs = 10 # Vertical movements
     phs = 15 # Horizontal movements
     bz = 200 # batch size
     samples_per_epoch=20000
     #checkpointer = ModelCheckpoint(filepath=cur_dir +"/model{epoch:02d}.h5", verbose=1, save_best_only=False)
-    model.fit_generator(data_generator(fs=feature_files,ls=labels,offsets=offsets,bz=bz,mode="disk",pvs=pvs,phs=phs,off_ang=off_ang,off_sh=off_sh,warp=warp), validation_data=[val_X,val_y],samples_per_epoch = samples_per_epoch, nb_epoch = nb_epoch, verbose=1, callbacks=[], class_weight=None, nb_worker=1)
+    model.fit_generator(data_generator(fs=feature_files,ls=labels,offsets=offsets,bz=bz,mode="disk",pvs=pvs,phs=phs,off_ang=off_ang,off_sh=off_sh,warp=warp),samples_per_epoch = samples_per_epoch, nb_epoch = nb_epoch, verbose=1, callbacks=[], class_weight=None, nb_worker=1)
 
     model_json = model.to_json()
     with open("model.json", "w") as json_file:

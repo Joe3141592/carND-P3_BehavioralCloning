@@ -214,10 +214,10 @@ optimizer = Adam(lr=0.0001)
   model = NVIDIAmodel()
   model.compile(loss="MSE", optimizer=optimizer)
   ###  Parameters ####
-  nb_epoch = 5 #number of epochs
-  off_ang = 0.1 #offset angle of the cameras
+  nb_epoch = 15 #number of epochs
+  off_ang = 0.09 #offset angle of the cameras
   off_sh = off_ang/100 #angle adjustments when moving the pictures horizontally
-  warp=50 #Range of perspective warping
+  warp=65 #Range of perspective warping
   pvs = 10 # Vertical movements
   phs = 15 # Horizontal movements
   bz = 200 # batch size
@@ -226,12 +226,9 @@ optimizer = Adam(lr=0.0001)
 I decreased the learning rate to 0.0001 as this resulted in more stable results.
 I used Adam optimizer and set the training examples per epoch to 20k as this roughly matched the amount
 of pictures I used. The batch size was 200 - this was the maximum my graphics card (*NVidia GTX1080*) could handle.
+I experimented with different epochs and found out that MSE ist not a valid score alone for anticipating if the car will stay on the road.
 
-Below you can see the output of the training pipeline:
 
-<p align="center">
-  <img src="readme_imgs/epochs.png"><img />
-</p>
 
 ## 4. Testing and Evaluation
 
@@ -246,11 +243,11 @@ I saw that changing the screen size and graphics quality influences the model pe
 
 ### Driving results on evaluation track
 I tested my model using the second track. I did not use these data while traning.
+You can check out the results on the video below.
 
-I recorded the results [here](https://www.youtube.com/watch?v=zdXfK-4K3Pk).
 The car was able to drive the test track without any crashes safely. Quite impressive for the amount of data used and the fast training time.
 We see that sometimes the car
 comes very close to the border. Changing the offset angle and playing with learning rate and number of epochs could
 further optimize the model.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/zdXfK-4K3Pk" frameborder="0" allowfullscreen></iframe>
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/4lSxEpelXUw/0.jpg)](http://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE "Video Title")
